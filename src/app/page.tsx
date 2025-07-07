@@ -32,7 +32,7 @@ export default function Home() {
     setIsRolling(true);
     setLastRoll(null);
 
-    const rollTimeout = setTimeout(() => {
+    setTimeout(() => {
       const die1 = Math.floor(Math.random() * 6) + 1 as (1|2|3|4|5|6);
       const die2 = Math.floor(Math.random() * 6) + 1 as (1|2|3|4|5|6);
       const sum = die1 + die2;
@@ -43,31 +43,30 @@ export default function Home() {
       const targetNumber = board.find((n) => n.number === sum);
 
       if (targetNumber?.isAvailable) {
-        setBoard((prevBoard) =>
-          prevBoard.map((n) =>
-            n.number === sum ? { ...n, isAvailable: false } : n
-          )
-        );
-        setMessage(`Player ${currentPlayer} rolled a ${sum}. It's a hit! Roll again.`);
-        setLastRoll({ value: sum, hit: true });
+        setMessage(`Player ${currentPlayer} rolled a ${sum}.`);
+        setTimeout(() => {
+          setLastRoll({ value: sum, hit: true });
+          setBoard((prevBoard) =>
+            prevBoard.map((n) =>
+              n.number === sum ? { ...n, isAvailable: false } : n
+            )
+          );
+          setMessage(`It's a hit! Player ${currentPlayer}, roll again.`);
+        }, 750); 
       } else {
         const nextPlayer = currentPlayer === 1 ? 2 : 1;
         setMessage(`Player ${currentPlayer} rolled a ${sum}. Miss! Passing turn to Player ${nextPlayer}.`);
         setLastRoll({ value: sum, hit: false });
         
-        const turnTimeout = setTimeout(() => {
+        setTimeout(() => {
           setCurrentPlayer(nextPlayer);
           setMessage(`Player ${nextPlayer}'s turn. Roll the dice!`);
         }, 2000);
-        return () => clearTimeout(turnTimeout);
       }
     }, 1000);
-
-    return () => clearTimeout(rollTimeout);
   }, [board, currentPlayer, isRolling, winner]);
 
   const handleResetGame = useCallback(() => {
-    // Reset with a fresh copy of the initial state
     const newBoard = Array.from({ length: 11 }, (_, i) => ({
       number: i + 2,
       isAvailable: true,

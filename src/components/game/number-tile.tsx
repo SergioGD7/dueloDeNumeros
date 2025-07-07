@@ -30,15 +30,15 @@ export function NumberTile({ number, isAvailable, isLastHit, isLastMiss }: Numbe
     }
   }, [isLastMiss]);
 
+  const tileStateClasses = isAvailable
+    ? "bg-card text-card-foreground shadow-md border-b-4 border-primary/20 active:border-b-2 active:translate-y-0.5 hover:shadow-xl hover:-translate-y-1"
+    : "opacity-0 pointer-events-none";
 
   return (
     <div
       className={cn(
         "flex items-center justify-center aspect-square rounded-lg text-2xl sm:text-3xl font-bold transition-all duration-500",
-        isAvailable
-          ? "bg-card text-card-foreground shadow-md border-b-4 border-primary/20 active:border-b-2 active:translate-y-0.5 hover:shadow-xl hover:-translate-y-1"
-          : "opacity-0 pointer-events-none",
-        showHitAnimation && "animate-domino-fall",
+        showHitAnimation ? "animate-domino-fall" : tileStateClasses,
         showMissAnimation && "animate-shake ring-2 ring-destructive"
       )}
     >
