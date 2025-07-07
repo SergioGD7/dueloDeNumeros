@@ -52,7 +52,7 @@ const translations = {
 export default function Home() {
   const [board, setBoard] = useState(initialBoard);
   const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(1);
-  const [dice, setDice] = useState<[number, number]>([1, 1]);
+  const [dice, setDice] = useState<[1 | 2 | 3 | 4 | 5 | 6, 1 | 2 | 3 | 4 | 5 | 6]>([1, 1]);
   const [winner, setWinner] = useState<1 | 2 | null>(null);
   const [isRolling, setIsRolling] = useState(false);
   const [message, setMessage] = useState("Player 1, roll the dice to start!");
