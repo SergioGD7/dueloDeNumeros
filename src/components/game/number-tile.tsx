@@ -34,9 +34,9 @@ export function NumberTile({ number, isAvailable, isLastHit, isLastMiss }: Numbe
   return (
     <div
       className={cn(
-        "flex items-center justify-center aspect-square rounded-lg text-2xl sm:text-3xl font-bold transition-all duration-500 transform-gpu",
+        "flex items-center justify-center aspect-square rounded-lg text-2xl sm:text-3xl font-bold transition-all duration-300 transform-gpu",
         isAvailable
-          ? "bg-card text-card-foreground shadow-md hover:scale-105"
+          ? "bg-card text-card-foreground shadow-lg border border-white/80 hover:shadow-xl hover:-translate-y-1"
           : "bg-muted text-muted-foreground line-through opacity-50",
         showHit && "animate-pulse ring-4 ring-green-500",
         showMiss && "animate-shake ring-4 ring-destructive"

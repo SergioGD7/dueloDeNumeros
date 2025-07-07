@@ -31,7 +31,7 @@ const DieFace = ({ value }: { value: number }) => {
       <div
         key={i}
         className={cn(
-          "absolute w-1/4 h-1/4 bg-primary rounded-full",
+          "absolute w-1/4 h-1/4 bg-primary rounded-full shadow-inner",
           positionClass
         )}
       />
@@ -50,8 +50,9 @@ export function Die({ value, isRolling }: DieProps) {
   return (
     <div
       className={cn(
-        "w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-2xl shadow-lg flex items-center justify-center p-2 transition-transform duration-300",
-        isRolling && "animate-spin"
+        "w-20 h-20 sm:w-24 sm:h-24 bg-card rounded-2xl shadow-2xl flex items-center justify-center p-2 transition-all duration-300 border-2 border-primary/10",
+        "transform-gpu hover:-translate-y-2",
+        isRolling && "animate-tumble"
       )}
     >
       <DieFace value={value} />
