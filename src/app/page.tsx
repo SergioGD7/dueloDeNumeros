@@ -12,6 +12,15 @@ const initialBoard = Array.from({ length: 11 }, (_, i) => ({
   isAvailable: true,
 }));
 
+const numbersByRow = [
+  [7],
+  [6, 8],
+  [5, 9],
+  [4, 10],
+  [3, 11],
+  [2, 12],
+];
+
 export default function Home() {
   const [board, setBoard] = useState(initialBoard);
   const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(1);
@@ -96,42 +105,25 @@ export default function Home() {
         </div>
 
         <div className="p-4 bg-primary/5 rounded-xl">
-          <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
-            <div className="hidden md:block md:col-start-2"></div>
-            {board.slice(0, 4).map((num) => (
-              <NumberTile
-                key={num.number}
-                number={num.number}
-                isAvailable={num.isAvailable}
-                isLastHit={lastRoll?.hit === true && lastRoll.value === num.number}
-                isLastMiss={lastRoll?.hit === false && lastRoll.value === num.number}
-              />
+          <div className="flex flex-col items-center gap-3">
+            {numbersByRow.map((row, rowIndex) => (
+              <div key={rowIndex} className="flex justify-center gap-3">
+                {row.map(numValue => {
+                  const numData = board.find(n => n.number === numValue);
+                  if (!numData) return null;
+                  return (
+                    <div key={numData.number} className="w-16 sm:w-20">
+                      <NumberTile
+                        number={numData.number}
+                        isAvailable={numData.isAvailable}
+                        isLastHit={lastRoll?.hit === true && lastRoll.value === numData.number}
+                        isLastMiss={lastRoll?.hit === false && lastRoll.value === numData.number}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             ))}
-            <div className="hidden md:block"></div>
-            
-            <div className="hidden md:block"></div>
-             {board.slice(4, 9).map((num) => (
-              <NumberTile
-                key={num.number}
-                number={num.number}
-                isAvailable={num.isAvailable}
-                isLastHit={lastRoll?.hit === true && lastRoll.value === num.number}
-                isLastMiss={lastRoll?.hit === false && lastRoll.value === num.number}
-              />
-            ))}
-            <div className="hidden md:block"></div>
-            
-            <div className="col-span-4 md:col-span-6 flex justify-center gap-3">
-                {board.slice(9).map((num) => (
-                <NumberTile
-                    key={num.number}
-                    number={num.number}
-                    isAvailable={num.isAvailable}
-                    isLastHit={lastRoll?.hit === true && lastRoll.value === num.number}
-                    isLastMiss={lastRoll?.hit === false && lastRoll.value === num.number}
-                />
-                ))}
-            </div>
           </div>
         </div>
 
