@@ -50,9 +50,9 @@ export function Die({ value, isRolling }: DieProps) {
   return (
     <div
       className={cn(
-        "w-20 h-20 sm:w-24 sm:h-24 bg-card rounded-2xl shadow-2xl flex items-center justify-center p-2 transition-all duration-300 border-2 border-primary/10",
-        "transform-gpu hover:-translate-y-2",
-        isRolling && "animate-tumble"
+        "w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-card to-secondary rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.15),_0_5px_5px_rgba(0,0,0,0.2)] flex items-center justify-center p-2 transition-transform duration-300 border border-black/10",
+        "transform-gpu [transform-style:preserve-3d] hover:-translate-y-2 hover:rotate-x-12 hover:rotate-y-12",
+        isRolling && "animate-roll-3d"
       )}
     >
       <DieFace value={value} />

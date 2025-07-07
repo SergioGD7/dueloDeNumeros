@@ -93,18 +93,16 @@ export default {
           '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
           '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
         },
-        'tumble': {
-          '0%, 100%': { transform: 'rotate(0deg) scale(1)' },
-          '25%': { transform: 'rotate(90deg) scale(1.1)' },
-          '50%': { transform: 'rotate(180deg) scale(1)' },
-          '75%': { transform: 'rotate(270deg) scale(1.1)' },
+        'roll-3d': {
+          '0%': { transform: 'rotateX(0deg) rotateY(0deg)' },
+          '100%': { transform: 'rotateX(360deg) rotateY(360deg)' },
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'shake': 'shake 0.5s ease-in-out',
-        'tumble': 'tumble 1s ease-in-out',
+        'roll-3d': 'roll-3d 1s ease-in-out',
       },
     },
   },

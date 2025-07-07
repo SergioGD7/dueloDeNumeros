@@ -36,8 +36,8 @@ export function NumberTile({ number, isAvailable, isLastHit, isLastMiss }: Numbe
       className={cn(
         "flex items-center justify-center aspect-square rounded-lg text-2xl sm:text-3xl font-bold transition-all duration-300 transform-gpu",
         isAvailable
-          ? "bg-card text-card-foreground shadow-lg border border-white/80 hover:shadow-xl hover:-translate-y-1"
-          : "bg-muted text-muted-foreground line-through opacity-50",
+          ? "bg-card text-card-foreground shadow-md border-b-4 border-primary/20 active:border-b-2 active:translate-y-0.5 hover:shadow-xl hover:-translate-y-1"
+          : "bg-muted text-muted-foreground line-through opacity-50 shadow-inner",
         showHit && "animate-pulse ring-4 ring-green-500",
         showMiss && "animate-shake ring-4 ring-destructive"
       )}

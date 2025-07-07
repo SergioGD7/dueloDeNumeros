@@ -90,7 +90,7 @@ export default function Home() {
           <p className="text-lg font-semibold text-primary/80">{message}</p>
         </div>
 
-        <div className="flex justify-center gap-4 sm:gap-8 my-8">
+        <div className="flex justify-center gap-4 sm:gap-8 my-8 [perspective:1000px]">
           <Die value={dice[0]} isRolling={isRolling} />
           <Die value={dice[1]} isRolling={isRolling} />
         </div>
