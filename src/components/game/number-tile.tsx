@@ -11,21 +11,21 @@ interface NumberTileProps {
 }
 
 export function NumberTile({ number, isAvailable, isLastHit, isLastMiss }: NumberTileProps) {
-  const [showHit, setShowHit] = useState(false);
-  const [showMiss, setShowMiss] = useState(false);
+  const [showHitAnimation, setShowHitAnimation] = useState(false);
+  const [showMissAnimation, setShowMissAnimation] = useState(false);
 
   useEffect(() => {
     if (isLastHit) {
-      setShowHit(true);
-      const timer = setTimeout(() => setShowHit(false), 1000);
+      setShowHitAnimation(true);
+      const timer = setTimeout(() => setShowHitAnimation(false), 1000);
       return () => clearTimeout(timer);
     }
   }, [isLastHit]);
   
   useEffect(() => {
     if (isLastMiss) {
-        setShowMiss(true);
-        const timer = setTimeout(() => setShowMiss(false), 1000);
+        setShowMissAnimation(true);
+        const timer = setTimeout(() => setShowMissAnimation(false), 1000);
         return () => clearTimeout(timer);
     }
   }, [isLastMiss]);
@@ -34,12 +34,12 @@ export function NumberTile({ number, isAvailable, isLastHit, isLastMiss }: Numbe
   return (
     <div
       className={cn(
-        "flex items-center justify-center aspect-square rounded-lg text-2xl sm:text-3xl font-bold transition-all duration-300 transform-gpu",
+        "flex items-center justify-center aspect-square rounded-lg text-2xl sm:text-3xl font-bold transition-all duration-500",
         isAvailable
           ? "bg-card text-card-foreground shadow-md border-b-4 border-primary/20 active:border-b-2 active:translate-y-0.5 hover:shadow-xl hover:-translate-y-1"
-          : "bg-muted text-muted-foreground line-through opacity-50 shadow-inner",
-        showHit && "animate-pulse ring-4 ring-green-500",
-        showMiss && "animate-shake ring-4 ring-destructive"
+          : "opacity-0 pointer-events-none",
+        showHitAnimation && "animate-domino-fall",
+        showMissAnimation && "animate-shake ring-2 ring-destructive"
       )}
     >
       {number}

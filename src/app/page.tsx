@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
-import { Dices } from "lucide-react";
+import { Dices, RotateCw } from "lucide-react";
 import { Die } from "@/components/game/die";
 import { NumberTile } from "@/components/game/number-tile";
 import { WinnerDialog } from "@/components/game/winner-dialog";
@@ -13,12 +13,8 @@ const initialBoard = Array.from({ length: 11 }, (_, i) => ({
 }));
 
 const numbersByRow = [
-  [7],
-  [6, 8],
-  [5, 9],
-  [4, 10],
-  [3, 11],
-  [2, 12],
+  [2, 3, 4, 5, 6, 7],
+  [8, 9, 10, 11, 12],
 ];
 
 export default function Home() {
@@ -71,7 +67,12 @@ export default function Home() {
   }, [board, currentPlayer, isRolling, winner]);
 
   const handleResetGame = useCallback(() => {
-    setBoard(initialBoard);
+    // Reset with a fresh copy of the initial state
+    const newBoard = Array.from({ length: 11 }, (_, i) => ({
+      number: i + 2,
+      isAvailable: true,
+    }));
+    setBoard(newBoard);
     setCurrentPlayer(1);
     setDice([1, 1]);
     setWinner(null);
@@ -98,13 +99,8 @@ export default function Home() {
         <div className="my-6 h-14 flex items-center justify-center p-3 rounded-lg bg-accent/20 transition-colors duration-300">
           <p className="text-lg font-semibold text-primary/80">{message}</p>
         </div>
-
-        <div className="flex justify-center gap-4 sm:gap-8 my-8 [perspective:1000px]">
-          <Die value={dice[0]} isRolling={isRolling} />
-          <Die value={dice[1]} isRolling={isRolling} />
-        </div>
-
-        <div className="p-4 bg-primary/5 rounded-xl">
+        
+        <div className="p-4 bg-primary/5 rounded-xl mb-8">
           <div className="flex flex-col items-center gap-3">
             {numbersByRow.map((row, rowIndex) => (
               <div key={rowIndex} className="flex justify-center gap-3">
@@ -127,7 +123,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="flex justify-center gap-4 sm:gap-8 my-8 [perspective:1000px]">
+          <Die value={dice[0]} isRolling={isRolling} />
+          <Die value={dice[1]} isRolling={isRolling} />
+        </div>
+
+        <div className="mt-8 flex justify-center items-center gap-4">
           <Button
             onClick={handleRollDice}
             disabled={isRolling || winner !== null}
@@ -136,6 +137,16 @@ export default function Home() {
           >
             <Dices className="mr-2 h-6 w-6" />
             Roll Dice
+          </Button>
+           <Button
+            onClick={handleResetGame}
+            disabled={isRolling}
+            size="lg"
+            variant="outline"
+            className="font-bold text-lg px-8 py-6 rounded-full shadow-lg transform hover:scale-105 transition-transform"
+          >
+            <RotateCw className="mr-2 h-5 w-5" />
+            Reset
           </Button>
         </div>
       </div>

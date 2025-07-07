@@ -95,14 +95,19 @@ export default {
         },
         'roll-3d': {
           '0%': { transform: 'rotateX(0deg) rotateY(0deg)' },
-          '100%': { transform: 'rotateX(360deg) rotateY(360deg)' },
+          '100%': { transform: 'rotateX(720deg) rotateY(720deg)' },
+        },
+        'domino-fall': {
+          'from': { transform: 'rotateX(0deg)', opacity: '1' },
+          'to': { transform: 'perspective(500px) rotateX(-90deg) translateY(2rem)', opacity: '0' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'shake': 'shake 0.5s ease-in-out',
-        'roll-3d': 'roll-3d 1s ease-in-out',
+        'roll-3d': 'roll-3d 1s forwards cubic-bezier(.6,-0.28,.74,1.28)',
+        'domino-fall': 'domino-fall 1s forwards'
       },
     },
   },
